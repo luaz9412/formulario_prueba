@@ -87,25 +87,36 @@
 </div>
 
 <script>
-    // Captura coordenadas
-    window.onload = function() {
+    // Captura coordenadas y llena campo
+    function obtenerUbicacion() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
-                const lat = position.coords.latitude;
-                const lon = position.coords.longitude;
+                const lat = position.coords.latitude.toFixed(6);
+                const lon = position.coords.longitude.toFixed(6);
                 document.getElementById('geo').value = lat + "," + lon;
+                console.log('Ubicación obtenida:', document.getElementById('geo').value);
             }, function(error) {
-                document.getElementById('geo').value = "Error al obtener ubicación";
+                document.getElementById('geo').value = "Error: " + error.message;
             });
         } else {
             document.getElementById('geo').value = "Geolocalización no soportada";
         }
-    };
+    }
 
-    // Manejador del envío de la Sección 1
+    // Ejecutar al cargar
+    window.onload = obtenerUbicacion;
+
+    // Envío del formulario con validación
     document.getElementById('form1').addEventListener('submit', function(e){
         e.preventDefault();
         const form = e.target;
+        const geoField = document.getElementById('geo');
+
+        if (geoField.value === "" || geoField.value.includes("Error") || geoField.value === "Geolocalización no soportada") {
+            alert('Espere que se cargue la ubicación antes de enviar.');
+            return;
+        }
+
         const data = new FormData(form);
 
         fetch(form.action, {
@@ -124,4 +135,3 @@
 
 </body>
 </html>
-
