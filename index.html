@@ -51,6 +51,8 @@
         <select id="nombre" name="entry.7241129" required>
             <option value="" disabled selected>Seleccione un nombre</option>
             <option value="LUIS DIAZ">LUIS DIAZ</option>
+	    <option value="FRANCISCO DIAZ">FRANCISCO DIAZ</option>
+
             <option value="FERNANDO HERNANDEZ">FERNANDO HERNANDEZ</option>
         </select>
 
@@ -74,6 +76,21 @@
 </div>
 
 <script>
+
+<script>
+    // Asignación automática de procesos según el nombre
+    const asignaciones = {
+        "LUIS DIAZ": "TI",
+        "FRANCISCO DIAZ": "TI",
+        "FERNANDO HERNANDEZ": "Ventas"
+    };
+
+    document.getElementById('nombre').addEventListener('change', function() {
+        const procesoField = document.getElementById('proceso');
+        const seleccionado = this.value;
+        procesoField.value = asignaciones[seleccionado] || "";
+    });
+
     // Captura coordenadas y llena campo
     function obtenerUbicacion() {
         if (navigator.geolocation) {
