@@ -149,11 +149,10 @@
             mode: 'no-cors',
             body: data
         }).then(() => {
-            alert('Sección 1 enviada exitosamente.');
+            alert('Enviada exitosamente. Gracias.');
             form.classList.add('hidden');
             document.getElementById('section2').classList.remove('hidden');
-        }).catch(() => {
-            alert('Gracias.');
+        
         });
     });
 
