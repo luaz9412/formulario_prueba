@@ -47,7 +47,7 @@
 
     <form id="secure-form" method="POST" action="https://docs.google.com/forms/d/e/1FAIpQLSd3QzaCOG3jnU860QdrbHZkErO4JcLOZZ0zM-7xuD6LZoawZQ/formResponse" target="_self">
         
- <label>Nombre completo:</label>
+ <label>Nombre.:</label>
         <select id="nombre" name="entry.7241129" required>
             <option value="" disabled selected>Seleccione un nombre</option>
             <option value="LUIS DIAZ">LUIS DIAZ</option>
@@ -64,7 +64,7 @@
 
 
   <label>Proceso.:</label>
-        <input type="text" id="proceso" name="entry.1170449751" placeholder="Proceso" readonly required>
+        <input type="text" id="proceso" name="entry.1170449751" placeholder="------" readonly required>
 
        <label>Ubicación geográfica:</label>
         <input type="text" id="geo" name="entry.2081593853" readonly placeholder="Detectando ubicación..." required>
@@ -124,14 +124,16 @@
             method: 'POST',
             mode: 'no-cors',
             body: data
-        }).then(() => {
-            alert('Sección 1 enviada exitosamente.');
-            form.classList.add('hidden');
-            document.getElementById('section2').classList.remove('hidden');
+       }).then(() => {
+            alert('Formulario enviado exitosamente.');
+            form.reset();
+            document.getElementById('proceso').value = '';
+            document.getElementById('geo').value = '';
+            obtenerUbicacion(); // Vuelve a capturar la ubicación
         }).catch(() => {
             alert('Error al enviar. Intente de nuevo.');
-        });
     });
+
 </script>
 
 </body>
