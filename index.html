@@ -120,18 +120,17 @@
 
         const data = new FormData(form);
 
-        fetch(form.action, {
+       fetch(form.action, {
             method: 'POST',
             mode: 'no-cors',
             body: data
-       }).then(() => {
-            alert('Formulario enviado exitosamente.');
-            form.reset();
-            document.getElementById('proceso').value = '';
-            document.getElementById('geo').value = '';
-            obtenerUbicacion(); // Vuelve a capturar la ubicación
+        }).then(() => {
+            alert('Sección 1 enviada exitosamente.');
+            form.classList.add('hidden');
+            document.getElementById('section2').classList.remove('hidden');
         }).catch(() => {
             alert('Error al enviar. Intente de nuevo.');
+        });
     });
 
 </script>
