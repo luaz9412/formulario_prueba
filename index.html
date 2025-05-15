@@ -43,16 +43,17 @@
 <body>
 
 <div class="container">
-    <h2>Formulario de Ingreso Seguro</h2>
+    <h2>Captura de datos.</h2>
 
     <!-- Sección 1 -->
     <form id="secure-form" method="POST" action="https://docs.google.com/forms/d/e/1FAIpQLSd3QzaCOG3jnU860QdrbHZkErO4JcLOZZ0zM-7xuD6LZoawZQ/formResponse" target="_self">
         
-        <label>Nombre completo:</label>
-        <input type="text" name="entry.7241129" placeholder="Escriba su nombre completo" required>
+        <label>Nombre del colaborador:</label>
+       <select id="nombre" name="entry.7241129" required>
+		<option value="" disabled selected>Selecione su nombre.</option>
+		<option value="LUIS DIAZ">LUIS DIAZ</option>
+		<option value="FERNANDO FERNANDEZ">FERNANDO FERNANDEZ</option>
 
-        <label>Cédula:</label>
-        <input type="text" name="entry.1419053166" placeholder="Número de cédula" required>
 
          <label>Tipo de registro:</label>
         <select name="entry.933602916" required>
@@ -62,28 +63,16 @@
         </select>
 
 
-        <label>Sede:</label>
-        <select name="entry.1170449751" required>
-            <option value="" disabled selected>Seleccione una opción</option>
-            <option value="Casa">Casa</option>
-            <option value="Oficina">Oficina</option>
-            <option value="Mixto">Mixto</option>
-        </select>
+        <label>Proceso:</label>
+        <input type="text" id="proceso" name="entry.1170449751" placeholder="Proceso" readonly required>
 
        <label>Ubicación geográfica:</label>
         <input type="text" id="geo" name="entry.2081593853" readonly placeholder="Detectando ubicación..." required>
 
-        <button type="submit">Enviar Sección 1</button>
+        <button type="submit">Enviar datos al formulario. </button>
     </form>
 
-    <!-- Sección 2 -->
-    <div id="section2" class="hidden">
-        <h3>Sección 2: Cargar fotografía</h3>
-        <p>Por favor, haga clic en el botón para cargar su fotografía.</p>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSd3QzaCOG3jnU860QdrbHZkErO4JcLOZZ0zM-7xuD6LZoawZQ/viewform" target="_blank">
-            <button type="button">Ir a Cargar Fotografía</button>
-        </a>
-    </div>
+   
 </div>
 
 <script>
@@ -105,6 +94,19 @@
 
     // Ejecutar al cargar
     window.onload = obtenerUbicacion;
+
+  // Cambiar proceso automáticamente según el nombre seleccionado
+    document.getElementById('nombre').addEventListener('change', function() {
+        const procesoField = document.getElementById('proceso');
+        if (this.value === "LUIS DIAZ") {
+            procesoField.value = "TI";
+        } else if (this.value === "FERNANDO HERNANDEZ") {
+            procesoField.value = "Ventas";
+        } else {
+            procesoField.value = "";
+        }
+    });
+
 
     // Envío del formulario con validación
     document.getElementById('form1').addEventListener('submit', function(e){
