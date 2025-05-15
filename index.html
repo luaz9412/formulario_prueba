@@ -26,7 +26,7 @@
             border: 1px solid #ccc;
             font-size: 16px;
         }
-        input[readonly] {
+        input[readonly], select[readonly] {
             background-color: #eee;
             cursor: not-allowed;
         }
@@ -43,36 +43,34 @@
 <body>
 
 <div class="container">
-    <h2>Captura de datos.</h2>
+    <h2>Formulario de Ingreso Seguro</h2>
 
-    <!-- Sección 1 -->
     <form id="secure-form" method="POST" action="https://docs.google.com/forms/d/e/1FAIpQLSd3QzaCOG3jnU860QdrbHZkErO4JcLOZZ0zM-7xuD6LZoawZQ/formResponse" target="_self">
         
-        <label>Nombre del colaborador:</label>
-       <select id="nombre" name="entry.7241129" required>
-		<option value="" disabled selected>Selecione su nombre.</option>
-		<option value="LUIS DIAZ">LUIS DIAZ</option>
-		<option value="FERNANDO FERNANDEZ">FERNANDO FERNANDEZ</option>
+        <label>Nombre completo:</label>
+        <select id="nombre" name="entry.7241129" required>
+            <option value="" disabled selected>Seleccione un nombre</option>
+            <option value="LUIS DIAZ">LUIS DIAZ</option>
+            <option value="FERNANDO HERNANDEZ">FERNANDO HERNANDEZ</option>
+        </select>
 
 
-         <label>Tipo de registro:</label>
+        <label>Tipo de registro:</label>
         <select name="entry.933602916" required>
             <option value="" disabled selected>Seleccione una opción</option>
             <option value="Ingreso">Ingreso</option>
             <option value="Salida">Salida</option>
         </select>
 
-
         <label>Proceso:</label>
         <input type="text" id="proceso" name="entry.1170449751" placeholder="Proceso" readonly required>
 
-       <label>Ubicación geográfica:</label>
+        <label>Ubicación geográfica:</label>
         <input type="text" id="geo" name="entry.2081593853" readonly placeholder="Detectando ubicación..." required>
 
-        <button type="submit">Enviar datos al formulario. </button>
+        <button type="submit">Enviar Sección 1</button>
     </form>
 
-   
 </div>
 
 <script>
@@ -83,7 +81,6 @@
                 const lat = position.coords.latitude.toFixed(6);
                 const lon = position.coords.longitude.toFixed(6);
                 document.getElementById('geo').value = lat + "," + lon;
-                console.log('Ubicación obtenida:', document.getElementById('geo').value);
             }, function(error) {
                 document.getElementById('geo').value = "Error: " + error.message;
             });
@@ -95,7 +92,7 @@
     // Ejecutar al cargar
     window.onload = obtenerUbicacion;
 
-  // Cambiar proceso automáticamente según el nombre seleccionado
+    // Cambiar proceso automáticamente según el nombre seleccionado
     document.getElementById('nombre').addEventListener('change', function() {
         const procesoField = document.getElementById('proceso');
         if (this.value === "LUIS DIAZ") {
@@ -107,9 +104,8 @@
         }
     });
 
-
     // Envío del formulario con validación
-    document.getElementById('form1').addEventListener('submit', function(e){
+    document.getElementById('secure-form').addEventListener('submit', function(e){
         e.preventDefault();
         const form = e.target;
         const geoField = document.getElementById('geo');
