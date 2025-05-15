@@ -50,9 +50,23 @@
  <label>Nombre.:</label>
         <select id="nombre" name="entry.7241129" required>
             <option value="" disabled selected>Seleccione un nombre</option>
-            <option value="LUIS DIAZ">LUIS DIAZ</option>
-            <option value="SEBASTIAN MUÑOZ">SEBASTIAN MUÑOZ</option>
-   <option value="JEAN CARLOS MARTINEZ">JEAN CARLOS MARTINEZ</option>
+
+//TI
+            <option value="LUIS  DIAZ">LUIS EDUARDO DIAZ</option>
+            <option value="JAVIER VARGAS">JAVIER VARGAS</option>
+
+//Operaciones
+            <option value="ANDRES MUÑOZ">ANDRES MUÑOZ</option>
+
+//RH
+            <option value="DIANA MARTINEZ">DIANA MARTINEZ</option>
+
+//SST
+	   <option value="ANDREA ALFARO">ANDREA ALFARO</option>
+
+//Contabilidad.
+	   <option value="FELIPE GARCIA">FELIPE GARCIA</option>
+
         </select>
 
 
@@ -99,11 +113,17 @@
     document.getElementById('nombre').addEventListener('change', function() {
         const procesoField = document.getElementById('proceso');
         if (this.value === "LUIS DIAZ") {
-            procesoField.value = "TI";
-        } else if (this.value === "SEBASTIAN MUÑOZ") {
-            procesoField.value = "Calidad.";
-  } else if (this.value === "JEAN CARLOS MARTINEZ") {
-            procesoField.value = "Contabilidad.";
+            procesoField.value = "T.I";
+        } else if (this.value === "JAVIER VARGAS") {
+            procesoField.value = "T.I.";
+  } else if (this.value === "ANDRES MUÑOZ") {
+            procesoField.value = "OPERACIONES.";
+ } else if (this.value === "DIANA MARTINEZ") {
+            procesoField.value = "RECURSOS HUMANOS.";
+} else if (this.value === "ANDREA ALFARO") {
+            procesoField.value = "SALUD Y SEGURIDAD EN EL TRABAJO.";
+} else if (this.value === "FELIPE GARCIA") {
+            procesoField.value = "CONTABILIDAD.";
 
         } else {
             procesoField.value = "";
