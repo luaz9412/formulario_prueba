@@ -87,64 +87,33 @@
 
     document.getElementById('nombre').addEventListener('change', function() {
         const procesoField = document.getElementById('proceso');
+        const geoField = document.getElementById('geo');
         const seleccionado = this.value;
-        procesoField.value = asignaciones[seleccionado] || "";
-    });
 
-    // Captura coordenadas y llena campo
-    function obtenerUbicacion() {
+        // Asignar proceso automático
+        procesoField.value = asignaciones[seleccionado] || "";
+
+        // Asignar ubicación automáticamente
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
                 const lat = position.coords.latitude.toFixed(6);
                 const lon = position.coords.longitude.toFixed(6);
-                document.getElementById('geo').value = lat + "," + lon;
+                geoField.value = lat + "," + lon;
             }, function(error) {
-                document.getElementById('geo').value = "Error: " + error.message;
+                geoField.value = "Error: " + error.message;
             });
         } else {
-            document.getElementById('geo').value = "Geolocalización no soportada";
-        }
-    }
-
-    // Ejecutar al cargar
-    window.onload = obtenerUbicacion;
-
-    // Cambiar proceso automáticamente según el nombre seleccionado
-    document.getElementById('nombre').addEventListener('change', function() {
-        const procesoField = document.getElementById('proceso');
-        if (this.value === "LUIS DIAZ") {
-            procesoField.value = "TI";
-        } else if (this.value === "FERNANDO HERNANDEZ") {
-            procesoField.value = "Ventas";
-        } else {
-            procesoField.value = "";
+            geoField.value = "Geolocalización no soportada";
         }
     });
 
-    // Envío del formulario con validación
+   // Validación antes de enviar
     document.getElementById('secure-form').addEventListener('submit', function(e){
-        e.preventDefault();
-        const form = e.target;
         const geoField = document.getElementById('geo');
-
         if (geoField.value === "" || geoField.value.includes("Error") || geoField.value === "Geolocalización no soportada") {
-            alert('Espere que se cargue la ubicación antes de enviar.');
-            return;
+            alert('La ubicación debe estar cargada correctamente antes de enviar.');
+            e.preventDefault();
         }
-
-        const data = new FormData(form);
-
-        fetch(form.action, {
-            method: 'POST',
-            mode: 'no-cors',
-            body: data
-        }).then(() => {
-            alert('Sección 1 enviada exitosamente.');
-            form.classList.add('hidden');
-            document.getElementById('section2').classList.remove('hidden');
-        }).catch(() => {
-            alert('Error al enviar. Intente de nuevo.');
-        });
     });
 </script>
 
