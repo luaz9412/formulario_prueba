@@ -78,26 +78,28 @@
 <script>
 
 <script>
-    // Asignación automática de procesos según el nombre
-    const asignaciones = {
-        "LUIS DIAZ": "TI",
-        "FRANCISCO DIAZ": "TI",
-        "FERNANDO HERNANDEZ": "Ventas"
-    };
+   document.getElementById('nombre').addEventListener('change', function() {
+        var procesoField = document.getElementById('proceso');
+        var geoField = document.getElementById('geo');
+        var seleccionado = this.value;
 
-    document.getElementById('nombre').addEventListener('change', function() {
-        const procesoField = document.getElementById('proceso');
-        const geoField = document.getElementById('geo');
-        const seleccionado = this.value;
+        // Asignación de Proceso
+        if (seleccionado === "LUIS DIAZ") {
+            procesoField.value = "TI";
+        } else if (seleccionado === "FRANCISCO DIAZ") {
+            procesoField.value = "TI";
+        } else if (seleccionado === "FERNANDO HERNANDEZ") {
+            procesoField.value = "Ventas";
+        } else {
+            procesoField.value = "";
+        }
 
-        // Asignar proceso automático
-        procesoField.value = asignaciones[seleccionado] || "";
 
-        // Asignar ubicación automáticamente
+        // Asignación de ubicación automática
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
-                const lat = position.coords.latitude.toFixed(6);
-                const lon = position.coords.longitude.toFixed(6);
+                var lat = position.coords.latitude.toFixed(6);
+                var lon = position.coords.longitude.toFixed(6);
                 geoField.value = lat + "," + lon;
             }, function(error) {
                 geoField.value = "Error: " + error.message;
@@ -107,15 +109,17 @@
         }
     });
 
-   // Validación antes de enviar
+    // Validación previa al enviar
     document.getElementById('secure-form').addEventListener('submit', function(e){
-        const geoField = document.getElementById('geo');
+        var geoField = document.getElementById('geo');
+
         if (geoField.value === "" || geoField.value.includes("Error") || geoField.value === "Geolocalización no soportada") {
-            alert('La ubicación debe estar cargada correctamente antes de enviar.');
+            alert('Espere que se cargue la ubicación antes de enviar.');
             e.preventDefault();
         }
     });
 </script>
+
 
 </body>
 </html>
